@@ -1,23 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from 'react'
+import Home from './screens/home/index';
+import ScrollToTop from './components/ScrollToTop'
+import { toggle } from './utils/toggles';
 
 function App() {
+  const [isVisibleScrollToTop, setIsVisibleScrollToTop] = useState(false)
+  useEffect(() => {
+    document.addEventListener('scroll', function (e) {
+      setIsVisibleScrollToTop(toggle(200))
+    })
+  }, [])
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isVisibleScrollToTop && <ScrollToTop />}
+      <Home />
     </div>
   );
 }
